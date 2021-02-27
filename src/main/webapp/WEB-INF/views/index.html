@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>Hello people!</h1>
+
+<form method="post" th:action="@{/}" th:object="${createUpdateUser}">
+    <table border="1" cellpadding="5" cellspacing="2">
+        <tr>
+            <th>Name</th>
+            <th>Surame</th>
+            <th>City</th>
+            <th colspan="2">Buttons</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td>Hello [[${user.getName()}]]!</td>
+            <td th:text="${user.getSurname()}"></td>
+            <td th:text="${user.getCity()}"></td>
+            <td><a th:href="@{/update (id=${user.getId()})}">Update</a></td>
+            <td><a th:href="@{/delete (id=${user.getId()})}">Delete</a></td>
+        </tr>
+        <tr>
+            <th colspan="5" th:text="${updateTitle}"></th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="id" hidden th:value="${updateUser.id}">
+                <input type="text" name="name" placeholder="Enter name" th:value="${updateUser.name}">
+            </td>
+            <td><input type="text" name="surname" placeholder="Enter surname" th:value="${updateUser.surname}"></td>
+            <td><input type="text" name="city" id="city" placeholder="Enter city" th:value="${updateUser.city}"></td>
+            <td colspan="2"><button type="submit" th:text="${updateTitle}"></button></td>
+        </tr>
+    </table>
+    <br>
+
+</form>
+
+</body>
+</html>
